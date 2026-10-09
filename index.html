@@ -1,0 +1,1417 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Fer’s Crepas & Waffles</title>
+
+  <meta
+    name="description"
+    content="Fer’s Crepas & Waffles: catálogo de crepas dulces, crepas saladas, waffles y bebidas."
+  >
+
+  <!-- ARCHIVOS PWA: ACTIVAR POSTERIORMENTE -->
+  <!--
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#FBCFE8">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  -->
+
+  <!-- ESTILOS ORIGINALES -->
+  <link rel="stylesheet" href="css/estilos.css">
+
+  <!-- LEAFLET: ACTIVAR POSTERIORMENTE -->
+  <!--
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"
+  >
+  -->
+
+  <!-- ESTILOS EXCLUSIVOS DEL PIE DE PÁGINA -->
+  <style>
+    #contacto-footer {
+      background: #fbcfe8;
+      border-radius: 70px;
+      padding: 13px 18px;
+      margin: 28px auto 14px;
+      width: calc(100% - 36px);
+      max-width: 1450px;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    #contacto-footer .contacto-filas {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    #contacto-footer .contacto-panel {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      min-width: 0;
+      background: #fff0f8;
+      border-radius: 65px;
+      padding: 19px 21px;
+      box-sizing: border-box;
+      text-align: left;
+    }
+
+    #contacto-footer .contacto-icono {
+      flex: 0 0 78px;
+      width: 78px;
+      height: 78px;
+      color: #e46191;
+    }
+
+    #contacto-footer .contacto-info {
+      min-width: 0;
+      color: #75300d;
+      font-size: 19px;
+      line-height: 1.44;
+      font-weight: 700;
+    }
+
+    #contacto-footer .contacto-titulo {
+      color: #db5b88;
+      font-size: 22px;
+      font-weight: 900;
+      margin: 0 0 6px;
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+
+    #contacto-footer p {
+      margin: 0;
+      color: #75300d;
+    }
+
+    #contacto-footer .contacto-redes {
+      display: grid;
+      gap: 5px;
+    }
+
+    #contacto-footer .contacto-red {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      overflow-wrap: anywhere;
+      color: #75300d;
+      text-decoration: none;
+    }
+
+    #contacto-footer .contacto-red svg {
+      color: #e46191;
+      width: 30px;
+      height: 30px;
+      flex-shrink: 0;
+    }
+
+    #contacto-footer .contacto-red:hover {
+      text-decoration: underline;
+    }
+
+    #contacto-footer .contacto-lema {
+      text-align: center;
+      font-size: 13px;
+      color: #75300d;
+      padding: 11px 4px 1px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 1050px) {
+      #contacto-footer {
+        border-radius: 38px;
+      }
+
+      #contacto-footer .contacto-filas {
+        grid-template-columns: 1fr;
+      }
+
+      #contacto-footer .contacto-panel {
+        border-radius: 32px;
+      }
+    }
+
+    @media (max-width: 500px) {
+      #contacto-footer {
+        width: calc(100% - 20px);
+        padding: 10px;
+      }
+
+      #contacto-footer .contacto-panel {
+        padding: 14px;
+        gap: 10px;
+      }
+
+      #contacto-footer .contacto-icono {
+        width: 54px;
+        height: 54px;
+        flex-basis: 54px;
+      }
+
+      #contacto-footer .contacto-info {
+        font-size: 15px;
+      }
+
+      #contacto-footer .contacto-titulo {
+        font-size: 18px;
+      }
+
+      #contacto-footer .contacto-red {
+        gap: 7px;
+      }
+
+      #contacto-footer .contacto-red svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  </style>
+
+  <!-- ESTILOS NUEVOS -->
+  <style>
+
+    /* Chocolate escurriendo debajo del encabezado */
+    .goteo-chocolate {
+      width: 100%;
+      height: 46px;
+      pointer-events: none;
+      background-repeat: repeat-x;
+      background-position: top left;
+      background-size: 240px 46px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='46' viewBox='0 0 240 46'><g fill='%2375300d'><rect x='0' y='0' width='240' height='13'/><rect x='22' y='0' width='18' height='36' rx='9'/><rect x='88' y='0' width='13' height='24' rx='6.5'/><rect x='150' y='0' width='20' height='44' rx='10'/><rect x='208' y='0' width='13' height='28' rx='6.5'/></g><g fill='%23fff0f8' opacity='.35'><rect x='27' y='8' width='4' height='18' rx='2'/><rect x='156' y='8' width='4' height='24' rx='2'/></g></svg>");
+    }
+
+    /* Chispitas de colores  */
+    .chispas {
+      width: 100%;
+      height: 26px;
+      pointer-events: none;
+      background-repeat: repeat-x;
+      background-size: 220px 26px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='26' viewBox='0 0 220 26'><rect x='10' y='6' width='12' height='5' rx='2.5' fill='%23e46191' transform='rotate(25 16 8)'/><rect x='48' y='14' width='12' height='5' rx='2.5' fill='%23db5b88' transform='rotate(-30 54 16)'/><rect x='88' y='4' width='12' height='5' rx='2.5' fill='%2375300d' transform='rotate(60 94 6)'/><rect x='126' y='15' width='12' height='5' rx='2.5' fill='%23fbcfe8' transform='rotate(-15 132 17)'/><rect x='164' y='6' width='12' height='5' rx='2.5' fill='%23e46191' transform='rotate(40 170 8)'/><rect x='196' y='15' width='12' height='5' rx='2.5' fill='%2375300d' transform='rotate(-50 202 17)'/><rect x='28' y='16' width='12' height='5' rx='2.5' fill='%23FBBF24' transform='rotate(35 34 18)'/><rect x='108' y='8' width='12' height='5' rx='2.5' fill='%23F59E0B' transform='rotate(-35 114 10)'/><rect x='146' y='5' width='12' height='5' rx='2.5' fill='%23FBBF24' transform='rotate(70 152 7)'/><rect x='180' y='16' width='12' height='5' rx='2.5' fill='%23F59E0B' transform='rotate(20 186 18)'/></svg>");
+    }
+
+    /* Título "Catálogo" en naranja */
+main > section > h2 {
+  color: var(--naranja);
+}
+
+    /* Subrayado ondulado de chocolate en los títulos */
+    main h2::after {
+      content: "";
+      display: block;
+      width: 110px;
+      height: 12px;
+      margin-top: 6px;
+      background-repeat: repeat-x;
+      background-size: 28px 12px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='12' viewBox='0 0 28 12'><path d='M0 6 Q7 0 14 6 T28 6' fill='none' stroke='%2375300d' stroke-width='3' stroke-linecap='round'/></svg>");
+    }
+
+    /* Chocolate escurriendo dentro del pie de página */
+    #contacto-footer {
+      position: relative;
+      overflow: hidden;
+      padding-top: 34px;
+    }
+
+    #contacto-footer::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 46px;
+      z-index: 0;
+      pointer-events: none;
+      background-repeat: repeat-x;
+      background-position: top left;
+      background-size: 240px 46px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='46' viewBox='0 0 240 46'><g fill='%2375300d'><rect x='0' y='0' width='240' height='9'/><rect x='60' y='0' width='16' height='30' rx='8'/><rect x='120' y='0' width='12' height='22' rx='6'/><rect x='185' y='0' width='18' height='38' rx='9'/></g></svg>");
+    }
+
+    #contacto-footer .contacto-filas,
+    #contacto-footer .contacto-lema {
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 500px) {
+      .goteo-chocolate {
+        height: 34px;
+        background-size: 180px 34px;
+      }
+
+      #contacto-footer {
+        padding-top: 30px;
+      }
+    }
+
+    .appbar .marca {
+      --logo: 210px;
+    }
+
+    .appbar .marca__logo {
+      width: var(--logo);
+      height: var(--logo);
+      object-fit: contain;
+    }
+
+    @media (max-width: 900px) {
+      .appbar .marca {
+        --logo: 180px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .appbar .marca {
+        --logo: 150px;
+      }
+    }
+
+    @media (max-width: 375px) {
+      .appbar .marca {
+        --logo: 128px;
+      }
+    }
+
+    /* Cuadro del catálogo*/
+    main > section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    main > section::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 26px;
+      z-index: 0;
+      pointer-events: none;
+      background-repeat: repeat-x;
+      background-size: 220px 26px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='26' viewBox='0 0 220 26'><rect x='10' y='6' width='12' height='5' rx='2.5' fill='%23e46191' transform='rotate(25 16 8)'/><rect x='48' y='14' width='12' height='5' rx='2.5' fill='%23db5b88' transform='rotate(-30 54 16)'/><rect x='88' y='4' width='12' height='5' rx='2.5' fill='%2375300d' transform='rotate(60 94 6)'/><rect x='126' y='15' width='12' height='5' rx='2.5' fill='%23fbcfe8' transform='rotate(-15 132 17)'/><rect x='164' y='6' width='12' height='5' rx='2.5' fill='%23e46191' transform='rotate(40 170 8)'/><rect x='196' y='15' width='12' height='5' rx='2.5' fill='%2375300d' transform='rotate(-50 202 17)'/><rect x='28' y='16' width='12' height='5' rx='2.5' fill='%23FBBF24' transform='rotate(35 34 18)'/><rect x='108' y='8' width='12' height='5' rx='2.5' fill='%23F59E0B' transform='rotate(-35 114 10)'/><rect x='146' y='5' width='12' height='5' rx='2.5' fill='%23FBBF24' transform='rotate(70 152 7)'/><rect x='180' y='16' width='12' height='5' rx='2.5' fill='%23F59E0B' transform='rotate(20 186 18)'/></svg>");
+    }
+
+    main > section > #catalogo {
+      margin-bottom: 30px;
+    }
+
+    /* Corazones y estrellitas decorativas */
+    .deco-corazones {
+      position: absolute;
+      top: 26px;
+      right: 20px;
+      width: 120px;
+      height: 40px;
+      pointer-events: none;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='40' viewBox='0 0 120 40'><path d='M20 30C8 21 8 11 15 11C18 11 20 13 20 15C20 13 22 11 25 11C32 11 32 21 20 30Z' fill='%23e46191'/><path d='M62 30C52 23 52 14 57 14C59.5 14 62 16 62 18C62 16 64.5 14 67 14C72 14 72 23 62 30Z' fill='%23fbcfe8' stroke='%23e46191' stroke-width='1.5'/><path d='M100 8L102 15L109 17L102 19L100 26L98 19L91 17L98 15Z' fill='%23db5b88'/><path d='M84 24L85 28L89 29L85 30L84 34L83 30L79 29L83 28Z' fill='%2375300d'/><path d='M44 3L46 9L52 11L46 13L44 19L42 13L36 11L42 9Z' fill='%23FBBF24'/><circle cx='8' cy='28' r='3' fill='%23F59E0B'/></svg>");
+      animation: deco-flotar 3.2s ease-in-out infinite;
+    }
+
+    @keyframes deco-flotar {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .deco-corazones {
+        animation: none;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .deco-corazones {
+        width: 84px;
+        height: 28px;
+        right: 12px;
+        top: 20px;
+      }
+    }
+  </style>
+
+  <!-- ESTILOS NUEVOS -->
+  <style>
+
+    .producto {
+      position: relative;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .producto::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 64px;
+      height: 26px;
+      transform: translateX(-50%);
+      z-index: 2;
+      pointer-events: none;
+      background-repeat: no-repeat;
+      background-size: 64px 26px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='26' viewBox='0 0 64 26'><g fill='%2375300d'><path d='M8 0H22V13a7 7 0 0 1-14 0Z'/><path d='M34 0H44V8a5 5 0 0 1-10 0Z'/><path d='M48 0H60V17a6 6 0 0 1-12 0Z'/></g><g fill='%23fff0f8' opacity='.35'><rect x='12' y='2' width='3' height='10' rx='1.5'/><rect x='52' y='2' width='3' height='9' rx='1.5'/></g></svg>");
+    }
+
+    .producto:not(.producto--cargando):active {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 26px rgba(228, 97, 145, .35);
+    }
+
+    @media (hover: hover) {
+      .producto:not(.producto--cargando):hover {
+        transform: translateY(-6px);
+        box-shadow: 0 14px 26px rgba(228, 97, 145, .35);
+      }
+    }
+
+    .producto button {
+      position: relative;
+      overflow: visible;
+      transition: transform .15s ease;
+    }
+
+    .producto button:not(:disabled):active {
+      transform: scale(.94);
+    }
+
+    .producto button.con-corazon {
+      animation: boton-brinco .45s ease;
+    }
+
+    .producto button.con-corazon::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: 22px;
+      height: 22px;
+      margin-left: -11px;
+      pointer-events: none;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22'><path d='M11 19C3 13 3 6 7.5 6C9.5 6 11 7.5 11 9C11 7.5 12.5 6 14.5 6C19 6 19 13 11 19Z' fill='%23e46191'/></svg>");
+      animation: corazon-sube .85s ease-out forwards;
+    }
+
+    @keyframes boton-brinco {
+      0%   { transform: translateY(0) scale(1); }
+      35%  { transform: translateY(-7px) scale(1.06); }
+      70%  { transform: translateY(0) scale(.96); }
+      100% { transform: translateY(0) scale(1); }
+    }
+
+    @keyframes corazon-sube {
+      0%   { opacity: 0; transform: translateY(0) scale(.5); }
+      20%  { opacity: 1; }
+      100% { opacity: 0; transform: translateY(-44px) scale(1.15); }
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: .13;
+      background-repeat: repeat;
+      background-size: 220px 220px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'><path d='M40 62C26 52 24 38 32 32C36 30 38 31 40 32C42 31 44 30 48 32C56 38 54 52 40 62Z' fill='%23e46191'/><path d='M33 31L40 24L47 31L40 33Z' fill='%23db5b88'/><circle cx='36' cy='42' r='1.3' fill='%23fff0f8'/><circle cx='44' cy='42' r='1.3' fill='%23fff0f8'/><circle cx='40' cy='50' r='1.3' fill='%23fff0f8'/><rect x='132' y='42' width='36' height='36' rx='7' fill='%23fbcfe8' stroke='%2375300d' stroke-width='2'/><path d='M144 42V78M156 42V78M132 54H168M132 66H168' stroke='%2375300d' stroke-width='2'/><path d='M34 176Q34 140 74 140Q74 176 34 176Z' fill='%23fbcfe8' stroke='%2375300d' stroke-width='2'/><path d='M44 156L52 150L58 158L66 152' fill='none' stroke='%2375300d' stroke-width='2' stroke-linecap='round'/><path d='M170 150C160 165 160 178 170 178C180 178 180 165 170 150Z' fill='%2375300d'/><path d='M110 112L112 118L118 120L112 122L110 128L108 122L102 120L108 118Z' fill='%23FBBF24'/><circle cx='190' cy='100' r='4' fill='%23F59E0B'/><circle cx='20' cy='110' r='3' fill='%23FBBF24'/></svg>");
+    }
+    .producto--cargando {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .producto--cargando .producto__foto {
+      background-color: #fbcfe8;
+    }
+
+    .producto--cargando::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 60%;
+      pointer-events: none;
+      transform: translateX(-120%);
+      background: linear-gradient(100deg, rgba(255, 240, 248, 0) 0%, rgba(255, 240, 248, .85) 50%, rgba(255, 240, 248, 0) 100%);
+      animation: brillo-carga 1.6s ease-in-out infinite;
+    }
+
+    @keyframes brillo-carga {
+      0%   { transform: translateX(-120%); }
+      100% { transform: translateX(260%); }
+    }
+    #contacto-footer::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-repeat: no-repeat, no-repeat;
+      background-size: 34px 34px, 34px 34px;
+      background-position: left 16px bottom 8px, right 16px bottom 8px;
+      background-image:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'><path d='M17 31C8 25 6 16 11 12C13.5 10.5 15.5 11.5 17 12.5C18.5 11.5 20.5 10.5 23 12C28 16 26 25 17 31Z' fill='%23e46191'/><path d='M11 11L17 5L23 11L17 13Z' fill='%23db5b88'/><circle cx='14' cy='18' r='1' fill='%23fff0f8'/><circle cx='20' cy='18' r='1' fill='%23fff0f8'/><circle cx='17' cy='23' r='1' fill='%23fff0f8'/></svg>"),
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'><path d='M17 31C8 25 6 16 11 12C13.5 10.5 15.5 11.5 17 12.5C18.5 11.5 20.5 10.5 23 12C28 16 26 25 17 31Z' fill='%23e46191'/><path d='M11 11L17 5L23 11L17 13Z' fill='%23db5b88'/><circle cx='14' cy='18' r='1' fill='%23fff0f8'/><circle cx='20' cy='18' r='1' fill='%23fff0f8'/><circle cx='17' cy='23' r='1' fill='%23fff0f8'/></svg>");
+    }
+
+    #contacto-footer .contacto-lema::before,
+    #contacto-footer .contacto-lema::after {
+      content: "";
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      margin: 0 8px;
+      vertical-align: middle;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'><path d='M7 0L8.6 5.4L14 7L8.6 8.6L7 14L5.4 8.6L0 7L5.4 5.4Z' fill='%23F59E0B'/></svg>");
+    }
+
+    @media (max-width: 500px) {
+      #contacto-footer::after {
+        background-size: 26px 26px, 26px 26px;
+        background-position: left 8px bottom 6px, right 8px bottom 6px;
+      }
+    }
+    .appbar {
+      animation: encabezado-entra .7s ease backwards;
+    }
+
+    .appbar .marca {
+      position: relative;
+    }
+
+    .appbar .marca__logo {
+      animation: logo-entra .8s cubic-bezier(.3, 1.4, .5, 1) backwards,
+                logo-brilla 3.4s ease-in-out 1s infinite;
+    }
+
+    .appbar .marca::after {
+      content: "";
+      position: absolute;
+      top: 8px;
+      left: calc(var(--logo) - 30px);
+      width: 28px;
+      height: 28px;
+      pointer-events: none;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'><path d='M10 0L12.3 7.7L20 10L12.3 12.3L10 20L7.7 12.3L0 10L7.7 7.7Z' fill='%23FBBF24' stroke='%23F59E0B' stroke-width='1'/></svg>");
+      animation: brillito 2.8s ease-in-out infinite;
+    }
+
+    @keyframes encabezado-entra {
+      from { opacity: 0; transform: translateY(-14px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    @keyframes logo-entra {
+      from { opacity: 0; transform: scale(.6); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes logo-brilla {
+      0%, 100% { filter: drop-shadow(0 0 0 rgba(228, 97, 145, 0)); }
+      50%      { filter: drop-shadow(0 0 8px rgba(228, 97, 145, .55)); }
+    }
+
+    @keyframes brillito {
+      0%, 100% { opacity: 0; transform: scale(.3) rotate(0deg); }
+      50%      { opacity: 1; transform: scale(1) rotate(45deg); }
+    }
+
+    @media (max-width: 600px) {
+      .appbar .marca::after {
+        top: 4px;
+        left: 50%;
+        margin-left: calc(var(--logo) / 2 - 26px);
+        width: 22px;
+        height: 22px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .producto,
+      .producto button,
+      .producto button.con-corazon,
+      .producto button.con-corazon::after,
+      .producto--cargando::after,
+      .appbar,
+      .appbar .marca__logo,
+      .appbar .marca::after {
+        animation: none;
+        transition: none;
+      }
+    }
+  </style>
+
+  <!-- NOMBRE JUNTO AL LOGO -->
+  <style>
+
+    .appbar {
+      justify-content: flex-start;
+      padding-left: clamp(1.2rem, 4vw, 3.5rem);
+    }
+
+    .appbar .marca {
+      gap: 1.6rem;
+    }
+
+    .marca__nombre {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-width: 0;
+      text-align: left;
+      font-family: var(--fuente-titulo);
+      animation: nombre-entra .8s cubic-bezier(.3, 1.3, .5, 1) .15s backwards;
+    }
+
+    .marca__nombre-uno {
+      color: var(--crema);
+      font-size: clamp(2.8rem, 5.2vw, 4.4rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: .5px;
+      text-shadow:
+        0 3px 0 var(--cafe),
+        0 9px 18px rgba(91, 39, 12, .35);
+    }
+
+    .marca__nombre-dos {
+      margin-top: .1rem;
+      color: var(--naranja-claro);
+      font-size: clamp(1.6rem, 3.2vw, 2.6rem);
+      font-weight: 800;
+      line-height: 1.1;
+      text-shadow:
+        0 3px 0 var(--cafe),
+        0 8px 16px rgba(91, 39, 12, .35);
+    }
+
+    .marca__nombre-dos em {
+      color: var(--crema);
+      font-style: normal;
+    }
+
+    .marca__nombre-lema {
+      margin-top: .8rem;
+      padding: .3rem 1rem;
+      color: var(--cafe);
+      background: var(--crema);
+      border: 2px solid var(--rosa-claro);
+      border-radius: 999px;
+      font-family: var(--fuente-texto);
+      font-size: .95rem;
+      font-weight: 800;
+      letter-spacing: .2px;
+      transform: rotate(-2deg);
+      box-shadow: 0 4px 10px rgba(91, 39, 12, .22);
+    }
+
+    @keyframes nombre-entra {
+      from { opacity: 0; transform: translateX(-24px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    @media (max-width: 600px) {
+      .appbar {
+        justify-content: center;
+        padding-left: .8rem;
+      }
+
+      .appbar .marca {
+        flex-direction: column;
+        gap: .9rem;
+      }
+
+      .marca__nombre {
+        align-items: center;
+        text-align: center;
+      }
+
+      .marca__nombre-uno {
+        font-size: 2.6rem;
+      }
+
+      .marca__nombre-dos {
+        font-size: 1.6rem;
+      }
+
+      .marca__nombre-lema {
+        margin-top: .6rem;
+        font-size: .82rem;
+      }
+    }
+
+    @media (max-width: 375px) {
+      .marca__nombre-uno {
+        font-size: 2.2rem;
+      }
+
+      .marca__nombre-dos {
+        font-size: 1.35rem;
+      }
+    }
+  </style>
+
+  <style>
+
+    /* Cursor de fresita */
+    @media (hover: hover) and (pointer: fine) {
+      html,
+      body {
+        cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 34 34'><path d='M17 31C8 25 6 16 11 12C13.5 10.5 15.5 11.5 17 12.5C18.5 11.5 20.5 10.5 23 12C28 16 26 25 17 31Z' fill='%23e46191' stroke='%23fff0f8' stroke-width='1.5'/><path d='M11 11L17 5L23 11L17 13Z' fill='%23db5b88' stroke='%23fff0f8' stroke-width='1'/><circle cx='14' cy='18' r='1' fill='%23fff0f8'/><circle cx='20' cy='18' r='1' fill='%23fff0f8'/><circle cx='17' cy='23' r='1' fill='%23fff0f8'/></svg>") 16 16, auto;
+      }
+    }
+
+    main > section::after {
+      bottom: 14px;
+    }
+
+    #contacto-footer .pie-tira {
+      position: relative;
+      z-index: 1;
+      height: 30px;
+      margin: 10px -18px -13px;
+      pointer-events: none;
+      background-repeat: repeat-x;
+      background-position: left bottom;
+      background-size: 60px 30px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='30' viewBox='0 0 60 30'><path d='M0 12Q15 2 30 12T60 12V30H0Z' fill='%2375300d'/><rect x='8' y='18' width='9' height='3.5' rx='1.75' fill='%23fbcfe8' transform='rotate(25 12 20)'/><rect x='30' y='21' width='9' height='3.5' rx='1.75' fill='%23FBBF24' transform='rotate(-30 34 22)'/><rect x='46' y='16' width='9' height='3.5' rx='1.75' fill='%23e46191' transform='rotate(50 50 18)'/></svg>");
+    }
+
+    #contacto-footer::after {
+      background-position: left 16px bottom 36px, right 16px bottom 36px;
+    }
+
+    @media (max-width: 500px) {
+      #contacto-footer .pie-tira {
+        height: 24px;
+        margin: 8px -10px -10px;
+        background-size: 48px 24px;
+      }
+
+      #contacto-footer::after {
+        background-position: left 8px bottom 30px, right 8px bottom 30px;
+      }
+    }
+
+    @media (min-width: 1500px) {
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        background-repeat: no-repeat, no-repeat;
+        background-position: left 2% top 24%, right 2% top 52%;
+        background-size: 110px 202px, 110px 202px;
+        background-image:
+          url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='220' viewBox='0 0 120 220'><g fill='%23fff0f8' stroke='%23fbcfe8' stroke-width='3'><circle cx='36' cy='36' r='18'/><circle cx='58' cy='28' r='22'/><circle cx='84' cy='38' r='16'/><rect x='30' y='38' width='62' height='16' rx='8'/></g><g fill='%23fff0f8'><circle cx='36' cy='36' r='18'/><circle cx='58' cy='28' r='22'/><circle cx='84' cy='38' r='16'/><rect x='30' y='38' width='62' height='16' rx='8'/></g><ellipse cx='52' cy='122' rx='26' ry='32' fill='%23e46191'/><ellipse cx='42' cy='108' rx='6' ry='10' fill='%23fff0f8' opacity='.5' transform='rotate(20 42 108)'/><path d='M48 153L56 153L52 159Z' fill='%23db5b88'/><path d='M52 159Q44 176 54 188T50 214' fill='none' stroke='%2375300d' stroke-width='1.8'/><ellipse cx='96' cy='158' rx='16' ry='20' fill='%23FBBF24'/><ellipse cx='91' cy='151' rx='3.5' ry='6' fill='%23fff0f8' opacity='.55' transform='rotate(20 91 151)'/><path d='M93 177L99 177L96 182Z' fill='%23F59E0B'/><path d='M96 182Q90 195 98 204T95 218' fill='none' stroke='%2375300d' stroke-width='1.6'/></svg>"),
+          url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='220' viewBox='0 0 120 220'><g fill='%23fff0f8' stroke='%23fbcfe8' stroke-width='3'><circle cx='38' cy='38' r='16'/><circle cx='62' cy='30' r='22'/><circle cx='86' cy='40' r='18'/><rect x='30' y='40' width='64' height='16' rx='8'/></g><g fill='%23fff0f8'><circle cx='38' cy='38' r='16'/><circle cx='62' cy='30' r='22'/><circle cx='86' cy='40' r='18'/><rect x='30' y='40' width='64' height='16' rx='8'/></g><ellipse cx='64' cy='124' rx='26' ry='32' fill='%23FBBF24'/><ellipse cx='54' cy='110' rx='6' ry='10' fill='%23fff0f8' opacity='.55' transform='rotate(20 54 110)'/><path d='M60 155L68 155L64 161Z' fill='%23F59E0B'/><path d='M64 161Q72 178 62 190T66 214' fill='none' stroke='%2375300d' stroke-width='1.8'/><ellipse cx='24' cy='160' rx='16' ry='20' fill='%23e46191'/><ellipse cx='19' cy='153' rx='3.5' ry='6' fill='%23fff0f8' opacity='.5' transform='rotate(20 19 153)'/><path d='M21 179L27 179L24 184Z' fill='%23db5b88'/><path d='M24 184Q30 197 22 206T25 218' fill='none' stroke='%2375300d' stroke-width='1.6'/></svg>");
+        animation: globos-flotan 7s ease-in-out infinite;
+      }
+    }
+
+    @keyframes globos-flotan {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-14px); }
+    }
+
+    /* Pantalla de bienvenida*/
+    #bienvenida {
+      position: fixed;
+      inset: 0;
+      z-index: 2147483000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background-color: var(--rosa-principal);
+      background-image:
+        radial-gradient(circle at 50% 48%, rgba(255, 255, 255, .34), transparent 52%),
+        linear-gradient(rgba(219, 71, 115, .55) 2px, transparent 2px),
+        linear-gradient(90deg, rgba(219, 71, 115, .55) 2px, transparent 2px);
+      background-size: auto, 28px 28px, 28px 28px;
+      animation: bienvenida-sale .6s ease 1.9s forwards;
+    }
+
+    #bienvenida .bienvenida__goteo {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 70px;
+      transform-origin: top;
+      background-repeat: repeat-x;
+      background-size: 240px 70px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='70' viewBox='0 0 240 70'><g fill='%2375300d'><rect x='0' y='0' width='240' height='18'/><rect x='20' y='0' width='20' height='52' rx='10'/><rect x='84' y='0' width='15' height='34' rx='7.5'/><rect x='146' y='0' width='22' height='66' rx='11'/><rect x='206' y='0' width='15' height='40' rx='7.5'/></g><g fill='%23fff0f8' opacity='.3'><rect x='26' y='10' width='4' height='28' rx='2'/><rect x='153' y='10' width='4' height='38' rx='2'/></g></svg>");
+      animation: bienvenida-gotea 1s cubic-bezier(.3, .9, .3, 1) .1s backwards;
+    }
+
+    #bienvenida .bienvenida__centro {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .9rem;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    #bienvenida .bienvenida__logo {
+      display: block;
+      width: clamp(150px, 28vw, 210px);
+      height: clamp(150px, 28vw, 210px);
+      padding: 10px;
+      object-fit: contain;
+      border-radius: 50%;
+      background: var(--crema);
+      border: 6px solid var(--rosa-claro);
+      box-shadow:
+        0 0 0 5px rgba(255, 255, 255, .38),
+        0 16px 30px rgba(91, 39, 12, .32);
+      animation: bienvenida-logo .8s cubic-bezier(.34, 1.56, .64, 1) .3s backwards;
+    }
+
+    #bienvenida .bienvenida__nombre {
+      margin: 0;
+      color: var(--crema);
+      font-family: var(--fuente-titulo);
+      font-size: clamp(2rem, 6vw, 3.4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      text-shadow:
+        0 3px 0 var(--cafe),
+        0 9px 18px rgba(91, 39, 12, .35);
+      animation: bienvenida-texto .6s ease .7s backwards;
+    }
+
+    #bienvenida .bienvenida__lema {
+      margin: 0;
+      padding: .3rem 1rem;
+      color: var(--cafe);
+      background: var(--crema);
+      border: 2px solid var(--rosa-claro);
+      border-radius: 999px;
+      font-size: .95rem;
+      font-weight: 800;
+      transform: rotate(-2deg);
+      box-shadow: 0 4px 10px rgba(91, 39, 12, .22);
+      animation: bienvenida-texto .6s ease .9s backwards;
+    }
+
+    @keyframes bienvenida-gotea {
+      from { transform: scaleY(0); }
+      to   { transform: scaleY(1); }
+    }
+
+    @keyframes bienvenida-logo {
+      from { opacity: 0; transform: scale(.5) rotate(-10deg); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    @keyframes bienvenida-texto {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    @keyframes bienvenida-sale {
+      to {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #bienvenida {
+        display: none !important;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- PANTALLA DE BIENVENIDA -->
+  <div id="bienvenida" aria-hidden="true">
+    <div class="bienvenida__goteo"></div>
+    <div class="bienvenida__centro">
+      <img
+        src="icons/icon.png"
+        alt=""
+        class="bienvenida__logo">
+      <p class="bienvenida__nombre">Fer’s Crepas &amp; Waffles</p>
+      <p class="bienvenida__lema">Dulzura en cada mordida</p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var bienvenida = document.getElementById("bienvenida");
+      if (!bienvenida) {
+        return;
+      }
+      try {
+        if (sessionStorage.getItem("bienvenida-vista")) {
+          bienvenida.parentNode.removeChild(bienvenida);
+          return;
+        }
+        sessionStorage.setItem("bienvenida-vista", "1");
+      } catch (error) {
+        /* si el navegador no permite sessionStorage, solo se muestra de todos modos */
+      }
+      setTimeout(function () {
+        if (bienvenida.parentNode) {
+          bienvenida.parentNode.removeChild(bienvenida);
+        }
+      }, 2800);
+    })();
+  </script>
+
+  <header class="appbar">
+    <div class="marca">
+      <img
+        src="icons/icon.png"
+        alt="Logo de Fer’s Crepas & Waffles"
+        class="marca__logo">
+      <div class="marca__nombre" aria-hidden="true">
+        <span class="marca__nombre-uno">Fer’s</span>
+        <span class="marca__nombre-dos">Crepas <em>&amp;</em> Waffles</span>
+        <span class="marca__nombre-lema">Dulzura en cada mordida</span>
+      </div>
+
+      <div class="marca__texto">
+        <h1>Fer’s Crepas & Waffles</h1>
+        <p>Dulzura en cada mordida</p>
+      </div>
+
+    </div>
+
+    <span id="estado-conexion" class="pill">
+      Conectado
+    </span>
+
+  </header>
+
+
+  <!-- =========================================
+       CONTENIDO PRINCIPAL
+       ========================================= -->
+
+  <main>
+
+    <!-- NUEVO: BANDERÍN DE FIESTA -->
+    <div class="banderin" aria-hidden="true"></div>
+
+    <!-- =========================================
+         SECCIÓN 1: CATÁLOGO
+         SE MANTIENE ACTIVA
+         ========================================= -->
+
+    <section>
+
+      <!-- CORAZONES Y ESTRELLITAS -->
+      <div class="deco-corazones" aria-hidden="true"></div>
+
+      <h2>Catálogo</h2>
+
+      <div
+        id="catalogo"
+        class="grid"
+        aria-busy="true"
+        aria-label="Cargando catálogo"
+      >
+
+        <!-- TARJETA ESQUELETO 1 -->
+        <div
+          class="producto producto--cargando"
+          aria-hidden="true"
+        >
+          <div class="producto__foto"></div>
+
+          <strong>&nbsp;</strong>
+
+          <span class="precio">&nbsp;</span>
+
+          <p>&nbsp;</p>
+
+          <button type="button" disabled>
+            Agregar al carrito
+          </button>
+        </div>
+
+
+        <!-- TARJETA ESQUELETO -->
+        <div
+          class="producto producto--cargando"
+          aria-hidden="true"
+        >
+          <div class="producto__foto"></div>
+
+          <strong>&nbsp;</strong>
+
+          <span class="precio">&nbsp;</span>
+
+          <p>&nbsp;</p>
+
+          <button type="button" disabled>
+            Agregar al carrito
+          </button>
+        </div>
+
+
+        <!-- TARJETA ESQUELETO -->
+        <div
+          class="producto producto--cargando"
+          aria-hidden="true"
+        >
+          <div class="producto__foto"></div>
+
+          <strong>&nbsp;</strong>
+
+          <span class="precio">&nbsp;</span>
+
+          <p>&nbsp;</p>
+
+          <button type="button" disabled>
+            Agregar al carrito
+          </button>
+        </div>
+
+
+        <!-- TARJETA ESQUELETO -->
+        <div
+          class="producto producto--cargando"
+          aria-hidden="true"
+        >
+          <div class="producto__foto"></div>
+
+          <strong>&nbsp;</strong>
+
+          <span class="precio">&nbsp;</span>
+
+          <p>&nbsp;</p>
+
+          <button type="button" disabled>
+            Agregar al carrito
+          </button>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         SECCIÓN 2: CARRITO
+         COMENTADA PARA QUE NO APAREZCA
+         ========================================= -->
+
+    <!--
+    <section>
+
+      <h2>Carrito</h2>
+
+      <ul id="carrito-lista"></ul>
+
+      <p class="carrito-total-texto">
+        Total:
+        $<span id="carrito-total">0</span>
+      </p>
+
+      <button
+        id="btn-sincronizar"
+        type="button"
+      >
+        Sincronizar carrito
+      </button>
+
+      <p
+        id="carrito-mensaje"
+        class="mensaje"
+      ></p>
+
+    </section>
+    -->
+
+
+    <!-- =========================================
+         SECCIÓN 3: NOTIFICACIONES
+         COMENTADA PARA QUE NO APAREZCA
+         ========================================= -->
+
+    <!--
+    <section>
+
+      <h2>Notificaciones de ofertas</h2>
+
+      <button
+        id="btn-notificar"
+        type="button"
+      >
+        Activar notificaciones
+      </button>
+
+      <p
+        id="notificaciones-mensaje"
+        class="mensaje"
+      ></p>
+
+    </section>
+    -->
+
+
+    <!-- =========================================
+         SECCIÓN 4: DISTANCIA A LA SUCURSAL
+         COMENTADA PARA QUE NO APAREZCA
+         ========================================= -->
+
+    <!--
+    <section>
+
+      <h2>Distancia a la sucursal</h2>
+
+      <p class="sucursal-info">
+        Sucursal única:
+
+        <strong>
+          Fer’s Crepas & Waffles
+        </strong>,
+
+        Hermosillo, Sonora.
+      </p>
+
+      <button
+        id="btn-ubicacion"
+        type="button"
+      >
+        Usar mi ubicación
+      </button>
+
+      <p
+        id="ubicacion-mensaje"
+        class="mensaje"
+      ></p>
+
+      <div
+        id="mapa-ruta"
+        class="mapa"
+        hidden
+      ></div>
+
+    </section>
+    -->
+
+  </main>
+
+
+  <!-- =========================================
+                    PIE DE PÁGINA
+       ========================================= -->
+
+  <footer id="contacto-footer">
+
+    <div class="contacto-filas">
+
+      <!-- HORARIO -->
+      <div class="contacto-panel">
+
+        <svg
+          class="contacto-icono"
+          viewBox="0 0 80 80"
+          fill="none"
+          aria-hidden="true"
+        >
+          <circle
+            cx="40"
+            cy="40"
+            r="35"
+            stroke="currentColor"
+            stroke-width="5"
+          />
+
+          <path
+            d="M40 16v26l20 14"
+            stroke="currentColor"
+            stroke-width="5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+
+        <div class="contacto-info">
+
+          <h3 class="contacto-titulo">
+            Horario
+          </h3>
+
+          <p>
+            Lunes a Domingo
+            <br>
+            de 10:00 a.m. – 8:00 p.m.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- UBICACIÓN -->
+      <div class="contacto-panel">
+
+        <svg
+          class="contacto-icono"
+          viewBox="0 0 80 80"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M40 73C29 56 14 41 14 28a26 26 0 0 1 52 0c0 13-15 28-26 45Z"
+            fill="#e9a2bb"
+            opacity=".7"
+          />
+
+          <path
+            d="M40 64C30 49 21 39 21 28a19 19 0 0 1 38 0c0 11-9 21-19 36Z"
+            fill="#d95c88"
+          />
+
+          <path
+            d="M40 42 27 30c-8-9 5-19 13-9 8-10 21 0 13 9Z"
+            fill="white"
+          />
+        </svg>
+
+        <div class="contacto-info">
+
+          <h3 class="contacto-titulo">
+            Ubicación
+          </h3>
+
+          <p>
+            Blvd. del Sol #245, Col.
+            <br>
+            Las Flores, Hermosillo,
+            <br>
+            Sonora.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- REDES SOCIALES -->
+      <div class="contacto-panel">
+
+        <div class="contacto-info contacto-redes">
+
+          <!-- INSTAGRAM -->
+          <a
+            class="contacto-red"
+            href="https://www.instagram.com/fer.s_crepasandwaffles/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+          >
+
+            <svg
+              viewBox="0 0 32 32"
+              fill="none"
+              aria-hidden="true"
+            >
+              <rect
+                x="3"
+                y="3"
+                width="26"
+                height="26"
+                rx="7"
+                stroke="currentColor"
+                stroke-width="2.7"
+              />
+
+              <circle
+                cx="16"
+                cy="16"
+                r="6"
+                stroke="currentColor"
+                stroke-width="2.7"
+              />
+
+              <circle
+                cx="24"
+                cy="8"
+                r="1.7"
+                fill="currentColor"
+              />
+            </svg>
+
+            <span>
+              @fer.s_crepasandwaffles
+            </span>
+
+          </a>
+
+
+          <!-- FACEBOOK -->
+          <div class="contacto-red">
+
+            <svg
+              viewBox="0 0 32 32"
+              fill="none"
+              aria-hidden="true"
+            >
+              <circle
+                cx="16"
+                cy="16"
+                r="15"
+                fill="currentColor"
+              />
+
+              <path
+                d="M19 29V18h4l.5-5H19v-3c0-1.2.5-2 2-2h2V4.2c-1-.2-2.2-.3-3.5-.3-4 0-6.5 2.4-6.5 6.7V13H9v5h4v11"
+                fill="#fff0f8"
+              />
+            </svg>
+
+            <span>
+              Fer’s Crepas &amp; Waffles
+            </span>
+
+          </div>
+
+
+          <!-- WHATSAPP -->
+          <a
+            class="contacto-red"
+            href="https://wa.me/526622403123"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="WhatsApp"
+          >
+
+            <svg
+              viewBox="0 0 32 32"
+              fill="none"
+              aria-hidden="true">
+              <path
+                d="M6 24 4 29l6-2.3A13 13 0 1 0 6 24Z"
+                stroke="currentColor"
+                stroke-width="2.4"
+                stroke-linejoin="round"/>
+              <path
+                d="M11 9c-1 0-2 2-1.5 3.5 1.7 5.2 5.2 8.3 10 9.5 2 .5 4-1.4 3-2.4l-3.5-2c-.7-.3-1.2 2-2.5 1.3-2.1-1-3.8-2.8-4.9-5-.5-1 1.5-2 1.2-2.7L12 9.5c-.2-.3-.6-.5-1-.5Z"
+                fill="currentColor"
+              />
+            </svg>
+            <span>
+              662 – 2403 – 1238
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <p class="contacto-lema">
+      Fer’s Crepas &amp; Waffles · Dulzura en cada mordida
+    </p>
+    <div class="pie-tira" aria-hidden="true"></div>
+
+  </footer>
+
+
+  <!-- =========================================
+       JAVASCRIPT
+       ========================================= -->
+
+  <!-- CARRITO: ACTIVAR POSTERIORMENTE -->
+  <!--
+  <script src="js/carrito.js"></script>
+  -->
+
+
+  <!-- CSR: CARGA DEL CATÁLOGO -->
+  <script src="js/csr.js"></script>
+
+
+  <!-- NOTIFICACIONES: ACTIVAR POSTERIORMENTE -->
+  <!--
+  <script src="js/notificaciones.js"></script>
+  -->
+
+
+  <!-- GEOLOCALIZACIÓN: ACTIVAR POSTERIORMENTE -->
+  <!--
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"
+  ></script>
+
+  <script src="js/geolocalizacion.js"></script>
+  -->
+
+
+  <!-- APP.JS: ACTIVAR POSTERIORMENTE -->
+  <!--
+  <script src="js/app.js"></script>
+  -->
+
+
+  <!-- SERVICE WORKER: ACTIVAR POSTERIORMENTE -->
+  <!--
+  <script>
+    if ("serviceWorker" in navigator) {
+
+      navigator.serviceWorker.register("sw.js")
+        .then((registro) => {
+          console.log(
+            "Service Worker registrado con éxito:",
+            registro.scope
+          );
+        })
+        .catch((error) => {
+          console.error(
+            "No se pudo registrar el Service Worker:",
+            error
+          );
+        });
+
+    }
+  </script>
+  -->
+
+  <script>
+    document.addEventListener("click", function (evento) {
+      var boton = evento.target.closest(".producto button");
+
+      if (!boton || boton.disabled) {
+        return;
+      }
+
+      boton.classList.remove("con-corazon");
+      void boton.offsetWidth;
+      boton.classList.add("con-corazon");
+
+      setTimeout(function () {
+        boton.classList.remove("con-corazon");
+      }, 900);
+    });
+  </script>
+
+</body>
+</html>

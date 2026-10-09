@@ -1,0 +1,19 @@
+[
+    {"id":1,"nombre":"Nutella con fresa","categoria":"Crepas dulces","precio":85,"stock":20,"imagen":"img/nutella-con-fresa.webp"},
+    {"id":2,"nombre":"Cajeta con nuez","categoria":"Crepas dulces","precio":80,"stock":20,"imagen":"img/cajeta-con-nuez.webp"},
+    {"id":3,"nombre":"Plátano con lechera","categoria":"Crepas dulces","precio":75,"stock":20,"imagen":"img/platano-con-lechera.webp"},
+    {"id":4,"nombre":"Philadelphia con zarzamora","categoria":"Crepas dulces","precio":90,"stock":20,"imagen":"img/philadelphia-con-zarzamora.webp"},
+    {"id":5,"nombre":"Mazapán","categoria":"Crepas dulces","precio":75,"stock":20,"imagen":"img/mazapan.webp"},
+
+    {"id":6,"nombre":"Crepa de jamón y queso","categoria":"Saladas y waffles","precio":85,"stock":20,"imagen":"img/crepa-de-jamon-y-queso.webp"},
+    {"id":7,"nombre":"Crepa de pollo con champiñones","categoria":"Saladas y waffles","precio":95,"stock":20,"imagen":"img/crepa-de-pollo-con-champinones.webp"},
+    {"id":8,"nombre":"Waffle clásico con miel","categoria":"Saladas y waffles","precio":70,"stock":20,"imagen":"img/waffle-clasico-con-miel.webp"},
+    {"id":9,"nombre":"Waffle con helado","categoria":"Saladas y waffles","precio":95,"stock":20,"imagen":"img/waffle-con-helado.webp"},
+    {"id":10,"nombre":"Waffle con pollo frito","categoria":"Saladas y waffles","precio":120,"stock":20,"imagen":"img/waffle-con-pollo-frito.webp"},
+    
+    {"id":11,"nombre":"Café de olla","categoria":"Bebidas","precio":35,"stock":20,"imagen":"img/cafe-de-olla.webp"},
+    {"id":12,"nombre":"Frappé de Nutella","categoria":"Bebidas","precio":80,"stock":20,"imagen":"img/frappe-de-nutella.webp"},
+    {"id":13,"nombre":"Malteada de fresa","categoria":"Bebidas","precio":70,"stock":20,"imagen":"img/malteada-de-fresa.webp"},
+    {"id":14,"nombre":"Chocolate caliente","categoria":"Bebidas","precio":50,"stock":20,"imagen":"img/chocolate-caliente.webp"},
+    {"id":15,"nombre":"Smoothie de mango","categoria":"Bebidas","precio":65,"stock":20,"imagen":"img/smoothie-de-mango.webp"}
+]
