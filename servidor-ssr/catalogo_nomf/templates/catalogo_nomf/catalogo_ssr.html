@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fer's Crepas & Waffles | SSR</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff7ed;
+            color: #78350f;
+            margin: 30px;
+        }
+
+        h1 {
+            color: #78350f;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: white;
+            border: 1px solid #fbcfe8;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+
+        .precio {
+            font-weight: bold;
+            color: #b45309;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Fer's Crepas & Waffles</h1>
+    <h2>Catálogo renderizado en el servidor (SSR)</h2>
+
+    <p>
+        Los productos se generan directamente desde Django.
+        Puedes comprobarlo utilizando Ctrl + U.
+    </p>
+
+    <ul>
+        {% for producto in productos %}
+        <li>
+            <strong>{{ producto.nombre }}</strong> —
+            <span class="precio">${{ producto.precio }}</span>
+            (Stock: {{ producto.stock }})
+        </li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+
+# Entorno virtual
+venv/
+
+# Base de datos local
+db.sqlite3
+
+# Archivos temporales de Python
+__pycache__/
+*.pyc
