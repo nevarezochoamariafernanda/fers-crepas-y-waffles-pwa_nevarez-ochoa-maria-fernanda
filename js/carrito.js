@@ -139,20 +139,31 @@ function manejarClicCarrito(evento) {
   }
 }
 
-// Simula la sincronización del carrito
+
+ // Simula el envío del carrito cuando regresa la conexión
 function sincronizarCarrito() {
   const mensaje = document.getElementById("carrito-mensaje");
 
   if (!navigator.onLine) {
     mensaje.textContent =
-      "Sin conexión: el carrito se sincronizará cuando vuelva el internet.";
+      "Sin conexión. Tu pedido de Fer's Crepas & Waffles se guardó y se sincronizará cuando vuelva el internet.";
     return;
   }
 
-  // En una aplicación real aquí se enviarían los datos al servidor.
+  const carrito = leerCarrito();
+
+  if (carrito.length === 0) {
+    mensaje.textContent = "Tu carrito está vacío. No hay pedidos para sincronizar.";
+    return;
+  }
+
+  // Simulación de envío del carrito al servidor
+  console.log("Sincronizando pedido de Fer's Crepas & Waffles:", carrito);
+
   mensaje.textContent =
-    "Carrito guardado localmente. Sincronización con servidor simulada. ✓";
+    "¡Conexión recuperada! Tu pedido de Fer's Crepas & Waffles se sincronizó correctamente (simulación). ✓";
 }
+
 
 // Inicializa el carrito cuando carga la página
 document.addEventListener("DOMContentLoaded", () => {
