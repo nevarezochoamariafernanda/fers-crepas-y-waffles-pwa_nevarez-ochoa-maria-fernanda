@@ -1,0 +1,29 @@
+
+{
+  "id": "./",
+  "name": "Fer's Crepas & Waffles",
+  "short_name": "Fer's Crepas",
+  "description": "Crepas dulces, crepas saladas, waffles y bebidas. Dulzura en cada mordida.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "categories": ["food", "shopping"],
+  "background_color": "#FFF1F7",
+  "theme_color": "#FBCFE8",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
+ 
